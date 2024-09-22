@@ -2,12 +2,13 @@ import React, { useState } from "react";
 
 const headerNav = [
     {
-        title: "최저시급계산",
+        title: "home",
         url: "#intro"
     },
     {
         title: "계산기",
-        url: "#Cal"
+        url: "#Cal",
+        toggle: true // 계산기 링크에 toggle 속성 추가
     },
     {
         title: "기능3",
@@ -18,12 +19,12 @@ const headerNav = [
         url: "#port"
     },
     {
-        title: "기능5",
+        title: "chatbot",
         url: "#contact"
     }
 ];
 
-const Header = () => {
+const Header = ({ toggleCal }) => { // toggleCal props 추가
     const [show, setShow] = useState(false);
 
     const toggleMenu = () => {
@@ -40,7 +41,12 @@ const Header = () => {
                     <ul>
                         {headerNav.map((nav, key) => (
                             <li key={key}>
-                                <a href={nav.url}>{nav.title}</a>
+                                <a 
+                                    href={nav.url} 
+                                    onClick={nav.toggle ? (e) => { e.preventDefault(); toggleCal(); } : undefined} // toggle이 true일 때만 toggleCal 호출
+                                >
+                                    {nav.title}
+                                </a>
                             </li>
                         ))}
                     </ul>
@@ -60,6 +66,5 @@ const Header = () => {
         </header>
     );
 };
-
 
 export default Header;
