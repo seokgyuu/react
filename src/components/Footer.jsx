@@ -12,7 +12,7 @@ const Footer = () => {
     return (
         <footer id="footer" role="contentinfo">
            <div className="right">
-    <h3>노동법소개</h3>
+    <h3></h3>
     <ul>
         {footerText.map((footer, key) => (
             <li key={key}>
