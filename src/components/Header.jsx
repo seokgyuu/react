@@ -38,7 +38,7 @@ const Header = ({ toggleCal, toggleLaw, toggleChatbot }) => {
     const handleToggleChatbot = (e) => {
         e.preventDefault();
         setShowChatbot(!showChatbot);
-        toggleChatbot(); // 여기도 수정
+        toggleChatbot(); 
     };
 
     return (

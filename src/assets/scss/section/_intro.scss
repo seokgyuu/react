@@ -10,9 +10,6 @@
     flex-direction: column;
     padding: 16px;
 
-    @media (max-width: 800px){
-        justify-content: center;
-    }
     .img {
         position: absolute;
         left: 50%;
@@ -25,10 +22,6 @@
         filter: grayscale(100%);
         transition: all 0.3s;
 
-            @media (max-width: 320px){ 
-                width: 20vh;
-                height: 20vh;
-            }
         }
 
         &:hover .text {
@@ -76,10 +69,6 @@
                 margin-top: 0.5vw;
                 margin-bottom: 0;
                 display: none;
-
-                @media (max-width: 800px){ 
-                    display: block;
-                }
 
                 &:nth-child(1){
                     height: 25px;

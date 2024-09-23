@@ -18,16 +18,8 @@
         justify-content: space-between;
         margin: 100px 0;
 
-        @media (max-width: 800px){
-            flex-direction: column;
-        }
-
         .left {
             width: 40%;
-
-            @media (max-width: 800px){
-                width: 100%;
-            }
 
             .title {
                 border-top: 2px solid var(--black);
@@ -47,18 +39,11 @@
                 font-size: 12px;
                 padding-top: 20px;
 
-                @media (max-width: 800px){
-                    margin-bottom: 40px;
-                }
             }
         }
 
         .right {
             width: 50%;
-
-            @media (max-width: 800px){
-                width: 100%;
-            }
 
             h3 {
                 border-top: 2px solid var(--black);
