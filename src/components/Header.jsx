@@ -2,33 +2,35 @@ import React, { useState } from "react";
 
 const headerNav = [
     {
-        title: "home",
-        url: "#intro"
-    },
-    {
-        title: "계산기",
+        title: "Cal",
         url: "#Cal",
-        toggle: true // 계산기 링크에 toggle 속성 추가
+        toggle: true 
     },
     {
-        title: "기능3",
-        url: "#site"
-    },
-    {
-        title: "기능4",
-        url: "#port"
+        title: "Law",
+        url: "#Law",
+        toggle: true
     },
     {
         title: "chatbot",
-        url: "#contact"
+        url: "#chatbot"
     }
 ];
 
-const Header = ({ toggleCal }) => { // toggleCal props 추가
-    const [show, setShow] = useState(false);
+const Header = ({ toggleCal, toggleLaw }) => {
+    const [showCal, setShowCal] = useState(false);
+    const [showLaw, setShowLaw] = useState(false);
 
-    const toggleMenu = () => {
-        setShow((prevShow) => !prevShow);
+    const handleToggleCal = (e) => {
+        e.preventDefault();
+        setShowCal(!showCal);
+        toggleCal();
+    };
+
+    const handleToggleLaw = (e) => {
+        e.preventDefault();
+        setShowLaw(!showLaw);
+        toggleLaw();
     };
 
     return (
@@ -37,13 +39,13 @@ const Header = ({ toggleCal }) => { // toggleCal props 추가
                 <div className="header__logo">
                     <a href="/">team2</a>
                 </div>
-                <nav className={`header__nav ${show ? "show" : ""}`} role="navigation" aria-label="메인 메뉴">
+                <nav className={`header__nav ${showCal || showLaw ? "show" : ""}`} role="navigation" aria-label="메인 메뉴">
                     <ul>
                         {headerNav.map((nav, key) => (
                             <li key={key}>
                                 <a 
-                                    href={nav.url} 
-                                    onClick={nav.toggle ? (e) => { e.preventDefault(); toggleCal(); } : undefined} // toggle이 true일 때만 toggleCal 호출
+                                    href={nav.url}
+                                    onClick={nav.title === "Cal" ? handleToggleCal : nav.title === "Law" ? handleToggleLaw : undefined}
                                 >
                                     {nav.title}
                                 </a>
@@ -55,10 +57,9 @@ const Header = ({ toggleCal }) => { // toggleCal props 추가
                     className="header__nav__mobile"
                     id="headerToggle"
                     aria-controls="primary-menu"
-                    aria-expanded={show ? "true" : "false"}
+                    aria-expanded={showCal || showLaw ? "true" : "false"}
                     role="button" 
                     tabIndex="0"
-                    onClick={toggleMenu}
                 >
                     <span></span>
                 </div>
