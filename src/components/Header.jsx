@@ -13,13 +13,15 @@ const headerNav = [
     },
     {
         title: "chatbot",
-        url: "#chatbot"
+        url: "#chatbot",
+        toggle:true
     }
 ];
 
-const Header = ({ toggleCal, toggleLaw }) => {
+const Header = ({ toggleCal, toggleLaw, toggleChatbot }) => {
     const [showCal, setShowCal] = useState(false);
     const [showLaw, setShowLaw] = useState(false);
+    const [showChatbot, setShowChatbot] = useState(false);
 
     const handleToggleCal = (e) => {
         e.preventDefault();
@@ -33,19 +35,25 @@ const Header = ({ toggleCal, toggleLaw }) => {
         toggleLaw();
     };
 
+    const handleToggleChatbot = (e) => {
+        e.preventDefault();
+        setShowChatbot(!showChatbot);
+        toggleChatbot(); // 여기도 수정
+    };
+
     return (
         <header id="header" role="banner">
             <div className="header__inner">
                 <div className="header__logo">
                     <a href="/">team2</a>
                 </div>
-                <nav className={`header__nav ${showCal || showLaw ? "show" : ""}`} role="navigation" aria-label="메인 메뉴">
+                <nav className={`header__nav ${showCal || showLaw || showChatbot ? "show" : ""}`} role="navigation" aria-label="메인 메뉴">
                     <ul>
                         {headerNav.map((nav, key) => (
                             <li key={key}>
                                 <a 
                                     href={nav.url}
-                                    onClick={nav.title === "Cal" ? handleToggleCal : nav.title === "Law" ? handleToggleLaw : undefined}
+                                    onClick={nav.title === "Cal" ? handleToggleCal : nav.title === "Law" ? handleToggleLaw : handleToggleChatbot}
                                 >
                                     {nav.title}
                                 </a>
@@ -57,7 +65,7 @@ const Header = ({ toggleCal, toggleLaw }) => {
                     className="header__nav__mobile"
                     id="headerToggle"
                     aria-controls="primary-menu"
-                    aria-expanded={showCal || showLaw ? "true" : "false"}
+                    aria-expanded={showCal || showLaw || showChatbot ? "true" : "false"}
                     role="button" 
                     tabIndex="0"
                 >
