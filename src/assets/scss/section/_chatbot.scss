@@ -25,15 +25,21 @@
     font-size: 14px;
     line-height: 1.5;
 
-    div {
+    .user-message {
+      text-align: right;
       margin-bottom: 10px;
-
+      
       strong {
         color: #007bff;
       }
+    }
 
-      &:nth-child(even) strong {
-        color: #28a745; /* AI 응답은 다른 색으로 구분 */
+    .ai-message {
+      text-align: left; 
+      margin-bottom: 10px;
+
+      strong {
+        color: #28a745; 
       }
     }
   }

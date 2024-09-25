@@ -59,16 +59,16 @@ const Chatbot = () => {
 
   return (
     <div id="Chatbot">
-      <h1>챗봇</h1>
+      <h1>ChatBot</h1>
       <div id="chat-log">
         {chatLog.map((msg, index) => (
-          <div key={index}>
+          <div key={index} className={msg.sender === "사용자" ? "user-message" : "ai-message"}>
             <strong>{msg.sender}: </strong>
             {msg.message}
           </div>
         ))}
         {isTyping && (
-          <div>
+          <div className="ai-message">
             <strong>AI: </strong>
             {typingMessage}
           </div>
