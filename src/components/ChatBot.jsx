@@ -31,9 +31,9 @@ const Chatbot = () => {
   };
 
   return (
-    <div>
+    <section id="Chatbot"> {/* 'div'를 'section'으로 변경하여 ID를 추가합니다 */}
       <h1>챗봇</h1>
-      <div>
+      <div id="chat-log"> {/* chat-log에 대한 ID도 유지합니다 */}
         {chatLog.map((msg, index) => (
           <div key={index}>
             <strong>{msg.sender}: </strong>
@@ -50,7 +50,7 @@ const Chatbot = () => {
         />
         <button type="submit">전송</button>
       </form>
-    </div>
+    </section>
   );
 };
 
