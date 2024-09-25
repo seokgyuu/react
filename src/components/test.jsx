@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Chatbot = () => {
   const [userInput, setUserInput] = useState("");
   const [chatLog, setChatLog] = useState([]);
-  const [typingMessage, setTypingMessage] = useState(""); 
-  const [isTyping, setIsTyping] = useState(false); 
+  const [typingMessage, setTypingMessage] = useState(""); // To hold the current AI message being typed
+  const [isTyping, setIsTyping] = useState(false); // To manage the typing state
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -20,6 +20,7 @@ const Chatbot = () => {
         message: userInput,
       });
 
+      // Start typing the AI's response
       startTyping(response.data.response);
     } catch (error) {
       addMessageToChatLog("에러", "서버에 문제가 발생했습니다.");
@@ -35,15 +36,10 @@ const Chatbot = () => {
 
   const startTyping = (message) => {
     setIsTyping(true);
-    setTypingMessage(""); 
+    setTypingMessage(""); // Reset the typing message
 
-    
-    if (message.length > 0) {
-      setTypingMessage(message.charAt(0));
-    }
-
-    let index = 0; 
-    const typingSpeed = 50; 
+    let index = 0;
+    const typingSpeed = 50; // Typing speed in milliseconds
 
     const typingInterval = setInterval(() => {
       if (index < message.length) {
@@ -51,11 +47,18 @@ const Chatbot = () => {
         index++;
       } else {
         clearInterval(typingInterval);
-        addMessageToChatLog("AI", message);
-        setIsTyping(false); 
+        addMessageToChatLog("AI", message); // Once typing is done, add the full message to chat log
+        setIsTyping(false); // Reset typing state
       }
     }, typingSpeed);
   };
+
+  // Effect to handle typing animation
+  useEffect(() => {
+    if (isTyping && typingMessage) {
+      addMessageToChatLog("AI", typingMessage); // Update chat log with currently typed message
+    }
+  }, [typingMessage, isTyping]);
 
   return (
     <div id="Chatbot">
@@ -67,12 +70,6 @@ const Chatbot = () => {
             {msg.message}
           </div>
         ))}
-        {isTyping && (
-          <div>
-            <strong>AI: </strong>
-            {typingMessage}
-          </div>
-        )}
       </div>
       <form onSubmit={sendMessage}>
         <input
